@@ -145,6 +145,12 @@ http {
 			return 200;
 		}
 
+    {{ if $routerConfig.statusEndpoint }}
+    location /nginx_status {
+      stub_status on;
+    }
+    {{ end }}
+
 		location / {
 			proxy_buffering {{ if $routerConfig.ProxyBuffersConfig.Enabled }}on{{ else }}off{{ end }};
 			proxy_buffer_size {{ $routerConfig.ProxyBuffersConfig.Size }};
