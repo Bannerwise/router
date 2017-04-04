@@ -65,6 +65,7 @@ type RouterConfig struct {
 	HTTP2Enabled             bool                `key:"http2Enabled" constraint:"(?i)^(true|false)$"`
 	LogFormat                string              `key:"logFormat"`
 	ProxyBuffersConfig       *ProxyBuffersConfig `key:"proxyBuffers"`
+	StatusEndpoint           bool                `key:"statusEndpoint" constraint:"(?i)^(true|false)$"`
 }
 
 func newRouterConfig() (*RouterConfig, error) {
@@ -95,6 +96,7 @@ func newRouterConfig() (*RouterConfig, error) {
 		HTTP2Enabled:             true,
 		LogFormat:                `[$time_iso8601] - $app_name - $remote_addr - $remote_user - $status - "$request" - $bytes_sent - "$http_referer" - "$http_user_agent" - "$server_name" - $upstream_addr - $http_host - $upstream_response_time - $request_time`,
 		ProxyBuffersConfig:       proxyBuffersConfig,
+		StatusEndpoint:           false,
 	}, nil
 }
 
