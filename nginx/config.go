@@ -144,13 +144,13 @@ http {
 			default_type 'text/plain';
 			return 200;
 		}
-
     {{ if $routerConfig.statusEndpoint }}
     location /nginx_status {
       stub_status on;
+      allow 127.0.0.1;
+      deny all;
     }
     {{ end }}
-
 		location / {
 			proxy_buffering {{ if $routerConfig.ProxyBuffersConfig.Enabled }}on{{ else }}off{{ end }};
 			proxy_buffer_size {{ $routerConfig.ProxyBuffersConfig.Size }};
@@ -194,7 +194,9 @@ http {
 		}
 		{{ if $routerConfig.statusEndpoint }}
 		location /nginx_status {
-			stub_status on;
+      stub_status on;
+      allow 127.0.0.1;
+      deny all;
 		}
 		{{ end }}
 	}
