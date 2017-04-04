@@ -186,6 +186,11 @@ http {
 		location / {
 			return 404;
 		}
+		{{ if $routerConfig.statusEndpoint }}
+		location /nginx_status {
+			stub_status on;
+		}
+		{{ end }}
 	}
 	{{ end }}
 
